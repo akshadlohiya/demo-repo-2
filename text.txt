@@ -1,0 +1,16 @@
+int writeline(score scores[], int len, char *filename) {
+    int fd, wd;
+    char buf[LINESIZE];
+    fd = open(filename, O_RDWR | O_APPEND);
+    if(fd == -1) {
+        return -1;
+    }
+    printf("Enter a line: "); // Prompt the user for input
+    fgets(buf, LINESIZE, stdin); // Read input from the user
+    wd = write(fd, buf, strlen(buf));
+    if(wd == -1) {
+        return -1;
+    }
+    close(fd);
+    return len + 1;
+}
